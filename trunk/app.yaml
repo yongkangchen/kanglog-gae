@@ -1,0 +1,37 @@
+application: kanglog
+version: 3
+runtime: python
+api_version: 1
+skip_files: |
+ ^(.*/)?(
+ (app\.yaml)|
+ (app\.yml)|
+ (index\.yaml)|
+ (index\.yml)|
+ (#.*#)|
+ (.*~)|
+ (.*\.py[co])|
+ (.*/RCS/.*)|
+ (\..*)|
+ (.*/\.svn/.*)|
+ (.*/Thumbs\.db)|
+ )$
+
+handlers:
+- url: /images
+  static_dir: statics/images
+- url: /js
+  static_dir: statics/js
+- url: /skins
+  static_dir: statics/skins
+- url: /HtmlEditor
+  static_dir: statics/HtmlEditor
+- url: /history.html
+  static_files: statics/history.html
+  upload: static/history.html
+
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+
+- url: .*
+  script: main.py

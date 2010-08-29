@@ -1,0 +1,93 @@
+<!--<?
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache");
+
+?>-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="save" content="history">
+
+<title>小小菜刀编辑器2.0</title>
+<script type="text/javascript" src="editor/editor.js"></script>
+<script language="javascript">
+CD.IniEditor({
+	id   : ["logcontent"],
+	use  : [true],
+	root : './editor/'
+});
+function callback(data){
+	if(data[0]!="postsuccess") return;
+	window.parent.location.hash="#article&"+data[1];
+	if(data[2])
+		window.parent.blog.freshCategory();
+	window.parent.closeActiveLayer();
+}
+</script>
+<style type="text/css">
+ body { margin:0px auto;background-color:#F5F4EE;}
+ .prompt {border:1px dotted #ccc;background-color:#ffe;color:#666;padding: 5px 5px 5px 30px;line-height:120%;width:600px} 
+</style>
+</head>
+<body>
+<form id="editForm" name="editForm" method="POST" action="" onSubmit="CD.func.setData('logcontent');return window.parent.XMLHttp.formSubmit(this,callback);">
+<table width="550" border="0" cellpadding="2" cellspacing="1">
+  <tr>
+    <td align="right">标题：</td>
+    <td><input name="log_title" type="text" id="title" value="测试" style="width:260px"><span  id="editor_toolbar_btn_container" style="margin:0 0 0 10px"></span></td>
+  </tr>
+  <tr>
+    <td align="right">分类：</td>
+    <td>
+		<select name="log_catId" >
+
+		</select>
+		日期：<input class=text name="log_postTime" value="测试" type="text"/>
+	</td>
+  </tr>
+  <tr>
+    <td align="right" valign="top" style="padding-top:4px">内容：</td>
+    <td><textarea id="logcontent" name="log_content"></textarea>
+	</td>
+  </tr>
+  <tr>
+	<td align="right">密码：</td>
+	<td><input id="blogpsw" class="formtext" type="text" maxlength="18" size="15" value="" name="log_psw"/>留空不设密码。</td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="hidden" name="id"><input type="submit"  value="确定提交"><input type="reset" value="清除重置" onClick="UnDoProcess();" /></td>
+  </tr>
+</table>
+</form>  
+<script>
+	if(window.parent.blog){
+		var article=window.parent.blog.articles.editArticle;
+		var categories=window.parent.blog.categorys.getOptions();//Html(article.log_catId);
+		var form=document.editForm;
+		for(var i  in article){
+			if(form[i]){
+				form[i].value=article[i];
+			}
+		}
+		var pre;
+		var browser=window.parent.getBrowser();
+		if(browser=="Firefox"){
+			pre="../";
+		}else pre="";
+		if(form.id.value){
+			form.action=pre+"ajax.php?action=edit";
+		}else{
+			form.action=pre+"ajax.php?action=post";
+		}
+		var s=form.log_catId;
+		for(var i=1;i<categories.length;i++){
+			var opt = new Option(categories[i].cat_name,categories[i].cat_name);
+			s.options[s.options.length]=opt;
+			if(categories[i].cat_name==article.log_catId) opt.selected=true;
+		}
+	}
+</script>
+</body>
+</html>

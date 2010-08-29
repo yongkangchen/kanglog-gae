@@ -1,0 +1,78 @@
+#ActiveLayer{
+	display:none;
+	z-index:50;
+	position:fixed;
+	border:1px solid #FFFFFF;
+	background-color:#F5F4EE;
+	overflow:hidden;
+	width:50;
+	top:50px;
+	left:80px;
+	color:#000000;
+}
+*html #ActiveLayer {position:absolute;}  /*这个只有IE认识 */
+#ActiveLayer .text{
+	border:1px solid #CDCBBB;
+	padding:2px;
+}
+
+#loading {
+	display:block;
+	top:10px; 
+	right:20px; 
+	width:140px;
+	position:fixed;
+	height:16;
+	font-size:12px; 
+	color:#ffffff;
+	background-color:#cc0033;
+	line-height:17px;
+	padding-bottom:1px;
+}
+*html #loading {position:absolute;}  /*这个只有IE认识 */
+
+
+#ShadowLayer{
+	display:none;
+	position:fixed;
+	background-color:#666666;
+	filter:alpha(opacity=30);  
+	-moz-opacity:0.3; 
+	opacity: 0.3; 
+	z-index:40;
+	left:0px;
+	top:0px;
+	overflow:hidden;
+}
+*html #ShadowLayer {position:absolute;}  /*这个只有IE认识 */
+
+#AlertLayer{
+	display:none;
+	position:fixed;
+	background-color:#E6EAE4;
+	z-index:60;
+	padding:5px;
+	color:#447353;
+	border:1px solid #708075;
+	top:200px;
+	left:400px;
+}
+*html #AlertLayer {position:absolute;}  /*这个只有IE认识 */
+.alert_content{
+	padding:4px 2px 4px 2px;
+}
+#alert_button{
+	border:3px dotted #96A48F;
+	color:#666666;
+}
+.ALayer_title{
+	font:bold 14px Verdana, Arial, Helvetica, sans-serif;
+	background-color:#E6EAE4;
+	border-bottom:1px dotted #B9B7AD;
+	padding:4px;
+	color:#507040;
+	text-align:center;
+}
+#ALayer_content{
+	padding:2px 5px 6px 5px;
+}
