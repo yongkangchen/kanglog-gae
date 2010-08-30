@@ -55,6 +55,7 @@ def article (request):
         articles=[Article.get_by_id(int(a_id))]
     else:
         articles=Article.all().order('-postTime').fetch(10)
+    #TODO
     dicList=[{"response":"article","comment":'true',"page":'null',"count":"1","max":"10","admin":""}]
     for obj in articles:
         dic=dict([my_dic(obj,name) for name in obj.properties().keys()])
@@ -69,4 +70,9 @@ def getcategory (request):
     return simplejson.dumps(Category.all(),cls=GaeEncoder)
 def getguestbook (request):
     return simplejson.dumps(Guestbook.all().order('-postTime').fetch(10), cls=GaeEncoder)
+
+#http://localhost:8080/ajax.php?action=comment&id=81&page=1&radnum=0.8674970943153371
+def comment (request):
+    a_id=int(request.get('id'))
+    return simplejson.dumps(Comment.all().filter('article.key().id() =',a_id),cls=GaeEncoder)
     

@@ -10,7 +10,7 @@
 	<div id="head-nav">
 		<ul id="nav">
 			<li><a title="Home" class="current_page_item" href="#article">Home</a></li>
-			<li><a href="#guestbook">Guestbook</a></li>
+			<!--<li><a href="#guestbook">Guestbook</a></li>-->
 			<li><a href="#aboutme">About Me</a></li>
 			<li><a href="javascript:void(0)" id="logo">Dashboard</a></li>
 		</ul>
@@ -143,12 +143,13 @@
 						<input type="submit" name="sa" value="搜索">
 				</div></form>
 		</div>
+		<!--
 		<div class="widget">
 			<h4>Calendar</h4>
 				<div id="Calendar-content">
 					日历加载中。。。。。。
 				</div>
-		</div>
+		</div>-->
 		<div class="widget">
 			<h4>Categories</h4>
 				<div id="Category-content">
@@ -180,6 +181,7 @@
 <div class="clear"></div>
 
 <div id="footer">
+	<!--
 	<div id="foot-1">
 		<div class="widget">
 			<h4>RecentComments</h4>
@@ -187,9 +189,10 @@
 				最新评论加载中。。。。。。
 			</div>
 		</div>
-	</div><!-- end foot-1 -->
-
+	</div>--><!-- end foot-1 -->
+	
 	<div id="foot-right">
+		<!--
 		<div id="foot-2">
 			<div class="widget">
 				<h4>RecentGuestbook</h4>
@@ -197,8 +200,8 @@
 					最新评论加载中。。。。。。
 				</div>
 			</div>
-		</div><!-- end foot-2 -->
-
+		</div>--><!-- end foot-2 -->
+		<!--
 		<div id="foot-3">
 			<div class="widget">
 			<h4>Pages</h4>
@@ -206,7 +209,7 @@
 				<li><?=getLogin()?></li>
 			</ul>
 			</div>
-		</div><!-- end foot-3 -->
+		</div>--><!-- end foot-3 -->
 
 		<div class="clear"></div>
 	</div><!-- end foot-right -->
