@@ -33,24 +33,14 @@ img{
 a,area { blr:expression(this.onFocus=this.blur()) } /* for IE */
 :focus { -moz-outline-style: none; } /* for Firefox */
 </style>
-
 <script type="text/javascript" src="js/ajax.js"></script>
 <script type="text/javascript" src="js/my.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
+
 {% for jsFile in jsFiles %}
 <script type="text/javascript" src="js/inc/{{jsFile}}"></script>
 {% endfor %}
 <script>
-Skin.config={
-	CONTENT_DIV:'{{skinHtml.content}}',
-	ARTICLE_HTML_JS:'{{skinHtml.article}}',
-	PAGE_HTML_JS:'{{skinHtml.page}}',
-	MODE_HTML:'{{skinHtml.mode}}',
-	COMMENT_HTML_JS:'{{skinHtml.comment}}',
-	COMMENT_REPLY_HTML_JS:'{{skinHtml.commentReply}}',
-	LOGIN_HTML:'{{skinHtml.loginHtml}}',
-	LOGOUT_HTML:'{{skinHtml.logoutHtml}}'
-}
 var NOW_YEAR={{NOW_YEAR}};
 var NOW_MONTH={{NOW_MONTH}};
 var NOW_DAY={{NOW_DAY}};

@@ -1,4 +1,4 @@
-#code=utf-8
+#coding=utf-8
 import datetime
 from google.appengine.ext import db
 from google.appengine.tools import bulkloader
@@ -53,4 +53,4 @@ class ArticleLoader(bulkloader.Loader):
     bulkloader.Loader.__init__(self, 'Article',[('id',str),('author', getUser),
                                 ('category', cate),('title',decode),('content',decode),
                                 ('postTime',date),('password',decode),('commentCount',int),('viewCount',int)])
-loaders = [ArticleLoader]
+loaders = [ArticleLoader]#CategoryLoader

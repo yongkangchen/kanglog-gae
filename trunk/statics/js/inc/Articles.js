@@ -3,8 +3,6 @@ function Articles(blog){
 	var _cmd="article";
 	var _mode=1;
 	var _modeHistory;
-	var _contentDIV=Skin.config.CONTENT_DIV;
-	var _eval_creat_html=Skin.config.ARTICLE_HTML_JS;
 	var cellEvent=function(evt){
 		evt=evt||window.event;
 		var target=evt.target || evt.srcElement;
@@ -81,7 +79,7 @@ function Articles(blog){
 	function update(data){
 		var i=1,sumstr="";
 		if(_mode==1){
-			eval(_eval_creat_html);
+			sumstr+=Skin.html.article(data[1])
 			var div=$("post-"+data[1].id);
 			if(div){
 				div.innerHTML=sumstr;
@@ -92,7 +90,7 @@ function Articles(blog){
 				div.className="post";
 				div.id="post-"+data[1];
 				div.innerHTML=sumstr;
-				_contentDIV.appendChild(div);
+				$(Skin.html.contentDiv).appendChild(div);
 			}
 		}else if(_mode==2){
 			alert("need to be done");
@@ -119,60 +117,7 @@ function Articles(blog){
 			_blog.setTitle("没有日志");
 			return;
 		}
-		var sumstr="";
-		if (_mode==1){
-			for(var i=1,l=data.length; i < l; i++){
-				if(typeof(data[i].log_psw)=="number"){
-					if(data[i].log_psw==0) {ActiveLayer.alert('密码错误');return;}
-					data[i].log_content='<div id="protectedblog'+data[i].id+'" class="quote">';
-					data[i].log_content+=	'<div class="quote-title">加密日志</div>';
-					data[i].log_content+=	'<div class="quote-content">';
-					data[i].log_content+=		'<form id="protected'+data[i].id+'" method="POST" action="ajax.php?action=article&id='+data[i].id+'" onsubmit="return XMLHttp.formSubmit.call(blog.articles,this,blog.articles.pageBack);">';
-					data[i].log_content+=			'这篇日志被加密了。请输入密码后查看。<br/>';
-					data[i].log_content+=			'密码 <input type="password" class="text" id="log_psw" name="log_psw"/>';
-					data[i].log_content+=			'<input type="submit" class="button" value="提交"/>';
-					data[i].log_content+=		'</form>';
-					data[i].log_content+=	'</div>';
-					data[i].log_content+='</div>';
-				}
-				sumstr+='<div class="post" id="post-'+data[i].id+'">';
-				eval(_eval_creat_html);
-				sumstr+='</div>';
-			}
-		}
-		else if(_mode==2){
-			  sumstr+='<form name="f6" method="POST" action="ajax.php?action=batcmd" onsubmit="return XMLHttp.formSubmit(this,blog.articles.bat);">';
-			  sumstr+=	"<div class=\"listbox\"></div>";
-			  sumstr+=		"<div class=\"listbox-table\">";
-			  sumstr+=			"<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">";
-			  sumstr+=			"<tbody>";
-			  sumstr+=				"<tr>";
-			  sumstr+=					"<td class=\"listbox-header\" align=\"center\">标题</td>";
-			  sumstr+=					"<td class=\"listbox-header\" align=\"center\">作者</td>";
-			  sumstr+=					"<td class=\"listbox-header\" width=\"120\" align=\"center\">发表于</td>";
-			  sumstr+=					"</tr>";
-			  for(var i=1,l=data.length;i<l;i++){
-				  sumstr+=					"<tr>";
-				  sumstr+=						"<td class=\"listbox-entry\">";
-				  sumstr+=							"<span id=log_id"+data[i].id+"></span>";
-				  sumstr+=								"["+data[i].category+"]<a href=\"#article&"+data[i].id+"\">"+data[i].title+"</a>";
-				  sumstr+=						"</td>";
-				  sumstr+=						"<td class=\"listbox-entry\">"+data[i].author+"</td>";
-				  sumstr+=						"<td class=\"listbox-entry\" align=\"center\" width=\"120\" height=\"35\">"+data[i].postTime+"</td>";
-				  sumstr+=					"</tr>";
-			  }
-			  sumstr+=					"</tbody>";
-			  sumstr+=				"</table>";
-			  sumstr+=			"</div>";
-			  sumstr+=			"<div class='listbox-bottom'>";
-			  sumstr+=			"<span id=delbutton style=\"visibility: hidden;\">";
-			  sumstr+=				"<input type=\"checkbox\" onclick=\"CheckBoxAll(this.form,\'tr\',this.checked);\"/>";
-			  sumstr+=				"选中项：<input type=\"radio\" name=\"cmd\" value=\"del\" checked=true />删除";
-			  sumstr+=				"<input type=\"radio\" name=\"cmd\" value=\"move\" />移动到<select name=\"log_catId\">"+_blog.categorys.getOptionsHtml()+"</select>"/*@@@#*/;
-			  sumstr+=				"<input type=\"submit\" value=\"确定\">";
-			  sumstr+=			"</span></div>";
-			  sumstr+=		"</form>";
-		}
+		var sumstr=Skin.html.articleList(_mode,data);
 		var windowTitle;
 		if(data[0]==null || data[0].comment==true){ 
 			this.modeRecov();
@@ -186,7 +131,7 @@ function Articles(blog){
 			
 			_blog.comments.show(data[1].id);//@@@#
 		}else{
-			sumstr=Skin.config.MODE_HTML+sumstr+this.page(data[0]);
+			sumstr=Skin.html.mode+sumstr+this.page(data[0]);
 			_blog.skin.contentInner(sumstr);
 		}
 		_blog.setTitle(windowTitle);
