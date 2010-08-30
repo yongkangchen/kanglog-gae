@@ -106,7 +106,8 @@ function Blog(year,month,day){this.Extends(UserPanel);
 			}
 		})(this);
 
-		var dataCacher=[new RecentComments,new RecentGuestbooks,this.categorys];
+		//TODO 屏蔽
+		var dataCacher=[/*new RecentComments,new RecentGuestbooks,*/this.categorys];
 		var _showBack=[this.skin.siderBar.show];
 		_showBack.push(_showBack[0]);
 		_showBack.push(function(data,arg){
