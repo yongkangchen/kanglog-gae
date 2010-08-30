@@ -1,6 +1,6 @@
 function Skin(){
 	this.contentInner=function(html){
-		$(Skin.config.CONTENT_DIV).innerHTML=html;
+		$(Skin.html.contentDiv).innerHTML=html;
 	}
 	this.showAdminTool=function(isAdmin){
 			var html;
