@@ -1,4 +1,4 @@
-{% extends "../index.php" %}
+{% extends "index.php" %}
 {% block content %}
 <div id="wrapper">
 	<div id="container">

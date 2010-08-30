@@ -54,7 +54,7 @@ class MainHandler(webapp.RequestHandler):
             'NOW_DAY':time.strftime('%d',t),
             'config':config
         }
-        path = os.path.join(os.path.dirname(__file__),"templates/" + config.skinName+"/index.php")
+        path = os.path.join(os.path.dirname(__file__),"templates/" + config.skinName+".php")
         logging.debug("@@@@")
         self.response.out.write(template.render(path, template_values))
         #self.response.out.write(path)
