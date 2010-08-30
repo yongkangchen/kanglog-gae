@@ -35,7 +35,7 @@ function callback(data){
 <table width="550" border="0" cellpadding="2" cellspacing="1">
   <tr>
     <td align="right">标题：</td>
-    <td><input name="title" type="text" id="title" value="测试" style="width:260px"><span  id="editor_toolbar_btn_container" style="margin:0 0 0 10px"></span></td>
+    <td><input name="title" type="text" id="title" value="" style="width:260px"><span  id="editor_toolbar_btn_container" style="margin:0 0 0 10px"></span></td>
   </tr>
   <tr>
     <td align="right">分类：</td>
@@ -43,7 +43,7 @@ function callback(data){
 		<select name="log_catId" >
 
 		</select>
-		日期：<input class=text name="postTime" value="测试" type="text"/>
+		日期：<input class=text name="postTime" value="" type="text"/>
 	</td>
   </tr>
   <tr>
@@ -82,7 +82,7 @@ function callback(data){
 			form.action=pre+"ajax.php?action=post";
 		}
 		var s=form.log_catId;
-		for(var i=1;i<categories.length;i++){
+		for(var i=0;i<categories.length;i++){
 			var opt = new Option(categories[i].name,categories[i].name);
 			s.options[s.options.length]=opt;
 			if(categories[i].name==article.category) opt.selected=true;
