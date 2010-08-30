@@ -13,7 +13,7 @@ header("Pragma: no-cache");
 <script type="text/javascript" src="editor/editor.js"></script>
 <script language="javascript">
 CD.IniEditor({
-	id   : ["logcontent"],
+	id   : ["content"],
 	use  : [true],
 	root : './editor/'
 });
@@ -31,11 +31,11 @@ function callback(data){
 </style>
 </head>
 <body>
-<form id="editForm" name="editForm" method="POST" action="" onSubmit="CD.func.setData('logcontent');return window.parent.XMLHttp.formSubmit(this,callback);">
+<form id="editForm" name="editForm" method="POST" action="" onSubmit="CD.func.setData('content');return window.parent.XMLHttp.formSubmit(this,callback);">
 <table width="550" border="0" cellpadding="2" cellspacing="1">
   <tr>
     <td align="right">标题：</td>
-    <td><input name="log_title" type="text" id="title" value="测试" style="width:260px"><span  id="editor_toolbar_btn_container" style="margin:0 0 0 10px"></span></td>
+    <td><input name="title" type="text" id="title" value="测试" style="width:260px"><span  id="editor_toolbar_btn_container" style="margin:0 0 0 10px"></span></td>
   </tr>
   <tr>
     <td align="right">分类：</td>
@@ -43,12 +43,12 @@ function callback(data){
 		<select name="log_catId" >
 
 		</select>
-		日期：<input class=text name="log_postTime" value="测试" type="text"/>
+		日期：<input class=text name="postTime" value="测试" type="text"/>
 	</td>
   </tr>
   <tr>
     <td align="right" valign="top" style="padding-top:4px">内容：</td>
-    <td><textarea id="logcontent" name="log_content"></textarea>
+    <td><textarea id="content" name="content"></textarea>
 	</td>
   </tr>
   <tr>
@@ -83,9 +83,9 @@ function callback(data){
 		}
 		var s=form.log_catId;
 		for(var i=1;i<categories.length;i++){
-			var opt = new Option(categories[i].cat_name,categories[i].cat_name);
+			var opt = new Option(categories[i].name,categories[i].name);
 			s.options[s.options.length]=opt;
-			if(categories[i].cat_name==article.log_catId) opt.selected=true;
+			if(categories[i].name==article.category) opt.selected=true;
 		}
 	}
 </script>
