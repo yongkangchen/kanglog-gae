@@ -14,8 +14,9 @@ from django.utils import simplejson
 class GaeEncoder(simplejson.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, db.Model):
-            return dict([(name, getattr(obj, name)) for name
-                in obj.properties().keys()])
+            dictList=[(name, getattr(obj, name)) for name in obj.properties().keys()]
+            dictList.append(('id',obj.key().id()))
+            return dict(dictList)
         elif isinstance(obj, users.User):
             return {
                 'nickname': obj.nickname(),
