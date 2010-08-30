@@ -11,7 +11,7 @@ function Categories(blog){
 		innerAdminHtml:function(data,isAdmin){
 			var divName="cate_id";
 			var confirmText="确定要删除此分类吗？此分类下的文章也将被删除.";
-			for(var i=1,l=data.length;i<l;i++){
+			for(var i=0,l=data.length;i<l;i++){
 				var html="";
 				var id=data[i].id;
 				if($(divName+id)){
@@ -48,12 +48,12 @@ function Categories(blog){
 	function _getOptionsHtml(categories,selected)
 	{
 		var options="";
-		for(var i=1,l=categories.length;i<l;i++){
-			options+="<option value=\""+categories[i].cat_name;
-			if(categories[i].cat_name==selected){
+		for(var i=0,l=categories.length;i<l;i++){
+			options+="<option value=\""+categories[i].name;
+			if(categories[i].name==selected){
 				options+=" selected";
 			}
-			options+="\">"+categories[i].cat_name+"</option>\n";
+			options+="\">"+categories[i].name+"</option>\n";
 		}
 		//options="<select name=\"log_catId\">"+options+"</select>";//get the code of category options.
 		return options;
@@ -62,7 +62,7 @@ function Categories(blog){
 	{
 		var sumstr="";
 		var admincate="";
-		for(var i=1,l=data.length;i<l;i++)
+		for(var i=0,l=data.length;i<l;i++)
 		{
 			sumstr+="<li class=\"indent\">";
 			sumstr+="	<a href=\"#category&"+data[i].cat_name+"\">"+data[i].name+"</a>";
@@ -84,7 +84,7 @@ function Categories(blog){
 		var cat_name=prompt("请输入分类新名称：",name);
 		if(cat_name && cat_name!=name){
 			var category=this.getCaches();
-			for(var i=1,l=category.length;i<l;i++){
+			for(var i=0,l=category.length;i<l;i++){
 				if(category[i].cat_name==cat_name) {alert("分类名称重复");return;}
 			}
 			XMLHttp.getReq("ajax.php?action=editcatename&cat_name="+encodeURIComponent(cat_name)+"&name="+encodeURIComponent(name),function(data){
@@ -97,7 +97,7 @@ function Categories(blog){
 		var cate=prompt("请输入分类名称：","");
 		if(cate){
 			var category=this.getCaches();
-			for(var i=1,l=category.length;i<l;i++)
+			for(var i=0,l=category.length;i<l;i++)
 			{
 				if(category[i].cat_name==cate) {alert("分类名称重复");return;}
 			}

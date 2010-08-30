@@ -1,18 +1,23 @@
 function Articles(blog){
 	var _blog=blog;
 	var _cmd="article";
-	var _mode=1;
-	var _modeHistory;
-	var cellEvent=function(evt){
+	var _mode=1;//当前阅读模式
+	var _modeHistory;//阅读模式备份
+
+	//一个cell的点击事件
+	var cellClickEvent=function(evt){
 		evt=evt||window.event;
 		var target=evt.target || evt.srcElement;
 		var input=$$("input",target)[0];
 		if(input){
 			input.checked=!input.checked;
-			var cellNode=target.parentNode;
-			if(cellNode.style.backgroundColor) cellNode.style.backgroundColor="";
-			else cellNode.style.backgroundColor="#D6DDE5";
 		}
+	}
+	var cellOverEvent=function(evt){
+		this.style.backgroundColor="#D6DDE5";
+	}
+	var cellOutEvent = function(evt){
+		this.style.backgroundColor="";
 	}
 	//implements AdminAble
 	this.Abstract(AdminAble,{
@@ -26,9 +31,12 @@ function Articles(blog){
 				if(div){
 					if(isAdmin){
 						html="<a href=javascript:void(0) onClick=\"blog.articles.edit("+id+")\"><img src=\"images/icon_edit.gif\" alt=\"编辑\" /></a>|<a href=javascript:void(0) onClick=\"if (confirm('确定要删除这篇日志吗？')) blog.del('article',"+id+")\"><img src=\"images/icon_del.gif\" alt=\"删除\" />  </a>";
-						if(_mode==2 && !data[0].comment){
+						if(_mode==2){
 							html="<input type=\"checkbox\" name=\"log_id\" value="+id+" />"+html;
-							div.parentNode.parentNode.onclick=cellEvent;
+							var node=div.parentNode.parentNode;
+							node.onclick=cellClickEvent;
+							node.onmouseover=cellOverEvent;
+							node.onmouseout=cellOutEvent;
 						}
 					}
 					div.innerHTML=html;
