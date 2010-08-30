@@ -107,7 +107,7 @@ function Blog(year,month,day){this.Extends(UserPanel);
 		})(this);
 
 		//TODO 屏蔽
-		var dataCacher=[/*new RecentComments,new RecentGuestbooks,*/this.categorys];
+		var dataCacher=[new RecentComments,new RecentGuestbooks,this.categorys];
 		var _showBack=[this.skin.siderBar.show];
 		_showBack.push(_showBack[0]);
 		_showBack.push(function(data,arg){
@@ -115,7 +115,7 @@ function Blog(year,month,day){this.Extends(UserPanel);
 				_showBack[0](data,arg);
 				this.showAdminTool();
 			});
-		for(var i=0,l=dataCacher.length;i< l;i++){
+		for(var i=2,l=dataCacher.length;i< l;i++){
 			dataCacher[i].getDatas([_showBack[i],dataCacher[i].div]);
 		}
 		//TODO 屏蔽
