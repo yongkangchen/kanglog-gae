@@ -41,6 +41,8 @@ a,area { blr:expression(this.onFocus=this.blur()) } /* for IE */
 <script type="text/javascript" src="js/inc/{{jsFile}}"></script>
 {% endfor %}
 <script>
+Skin.html={}
+Skin.html.loginUrl='{{loginUrl}}'
 var NOW_YEAR={{NOW_YEAR}};
 var NOW_MONTH={{NOW_MONTH}};
 var NOW_DAY={{NOW_DAY}};

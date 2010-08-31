@@ -62,7 +62,7 @@ function Blog(year,month,day){this.Extends(UserPanel);
 		dataCacher[2].getDatas([_showBack[2],dataCacher[2].div]);
 	}
 	this.del=function(cmd,id){
-		XMLHttp.getReq.call(this,"ajax.php?action=del&cmd="+cmd+"&id="+id,function(data){
+		XMLHttp.getReq.call(this,"ajax.php?action=remove&cmd="+cmd+"&id="+id,function(data){
 			if(typeof(data)=="string"){
 				call_Alert(data);
 			}else{

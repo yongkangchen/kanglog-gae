@@ -21,6 +21,7 @@ from google.appengine.ext.webapp import util
 
 import os
 from google.appengine.ext.webapp import template
+from util import *
 
 from google.appengine.api import users
 import logging
@@ -39,12 +40,12 @@ if not config:
     config=models.Config(name=u'康的blog',desc=u'关注java,python,javascript,flex,c++,sgs',skinName=u'clean-simple-white')
     config.put()
 
+loginUrl=users.create_login_url("/login")
+
+    
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        logined='false'
-        if user:
-            logined='true'
+        logined = str(checkLogin()).lower()
         t=time.localtime(time.time())
         template_values = {
             'logined':logined,
@@ -52,7 +53,8 @@ class MainHandler(webapp.RequestHandler):
             'NOW_YEAR': time.strftime('%Y',t),
             'NOW_MONTH':time.strftime('%m',t),
             'NOW_DAY':time.strftime('%d',t),
-            'config':config
+            'config':config,
+            'loginUrl':loginUrl
         }
         path = os.path.join(os.path.dirname(__file__),"templates/" + config.skinName+".php")
         logging.debug("@@@@")
@@ -79,9 +81,21 @@ class AjaxHandler(webapp.RequestHandler):
         self.doAction();
     def doAction (self):
         self.response.out.write(kanglog.__getattribute__(cgi.escape(self.request.get('action')))(self.request))
-    
+
+loginHtml='''
+<html><head></head>
+<body onload="window.opener.blog.login('%s');window.close();">
+</body>
+</html>
+'''
+class LoginHandler(webapp.RequestHandler):
+    def get (self):
+        if checkLogin():
+            self.response.out.write(loginHtml%("success"));
+        else:
+            self.response.out.write(loginHtml%("falied"));
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler),('/test',TestHandler),('/ajax.php',AjaxHandler)],
+    application = webapp.WSGIApplication([('/', MainHandler),('/test',TestHandler),('/ajax.php',AjaxHandler),('/login',LoginHandler)],
                                          debug=True)
     util.run_wsgi_app(application)
 
