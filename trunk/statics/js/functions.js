@@ -116,5 +116,7 @@ function dragged(div_title,div_body)
 	}
 };
 function cancelDrag(div_title){
-	div_title.onmousedown=null;
+	if(div_title){
+		div_title.onmousedown=null;
+	}
 }

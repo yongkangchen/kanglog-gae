@@ -17,6 +17,10 @@ class Article(db.Model):
 
 
 class Guestbook(db.Model):
+    pass
+
+class Comment(db.Model):
+    article = db.ReferenceProperty(Article)
     content = db.StringProperty(required=True)
     messager = db.StringProperty(required=True)
     QQ = db.IntegerProperty()
@@ -27,8 +31,6 @@ class Guestbook(db.Model):
     replyTime = db.DateTimeProperty()
     ip = db.StringProperty()
 
-class Comment(Guestbook):
-    article = db.ReferenceProperty(Article)
 
 class Config(db.Model):
     name = db.StringProperty()

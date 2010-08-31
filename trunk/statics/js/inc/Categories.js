@@ -16,7 +16,7 @@ function Categories(blog){
 				var id=data[i].id;
 				if($(divName+id)){
 					if(isAdmin){
-						html ="<a href=javascript:void(0) onClick=\"blog.categorys.edit(\'"+data[i].cat_name+"\')\">";
+						html ="<a href=javascript:void(0) onClick=\"blog.categorys.edit(\'"+data[i].name+"\')\">";
 						html+="	<img src=\"images/icon_editcat.gif\" alt=\"编辑\" />";
 						html+="</a>|";
 						html+="<a  href=\"javascript:void(0)\" onClick=\"if(confirm('"+confirmText+"'))";
@@ -65,7 +65,7 @@ function Categories(blog){
 		for(var i=0,l=data.length;i<l;i++)
 		{
 			sumstr+="<li class=\"indent\">";
-			sumstr+="	<a href=\"#category&"+data[i].cat_name+"\">"+data[i].name+"</a>";
+			sumstr+="	<a href=\"#category&"+data[i].id+"\">"+data[i].name+"</a>";
 			sumstr+="	("+data[i].count+") <span id='cate_id"+data[i].id+"'></span>";
 			sumstr+="	<a target=\"_blank\" title=\""+data[i].name+" RSS Feed\" href=\"feed.php?log_catId="+data[i].name+"\">";
 			sumstr+="		<img src=\"images/rss.png\"/>";

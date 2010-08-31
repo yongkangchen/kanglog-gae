@@ -21,7 +21,6 @@
 		<div id="text">
 			日志加载中。。。。。。
 			<script>
-				Skin.html={}
 				Skin.html.contentDiv="text";			
 				Skin.html.comment = function(){
 					var sumstr="";

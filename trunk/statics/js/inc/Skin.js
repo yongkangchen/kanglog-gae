@@ -3,6 +3,7 @@ function Skin(){
 		$(Skin.html.contentDiv).innerHTML=html;
 	}
 	this.showAdminTool=function(isAdmin){
+			/*
 			var html;
 			if(isAdmin){
 				html=Skin.config.LOGIN_HTML;
@@ -10,6 +11,7 @@ function Skin(){
 				html=Skin.config.LOGOUT_HTML;
 			}
 			$("logintext").innerHTML=html;
+			*/
 		}
 	this.siderBar=new function(){
 		this.show=function(data,where){
@@ -38,6 +40,7 @@ function Skin(){
 			return fstr;
 	}
 	this.login=function(){
+		/*
 		var p={caption:"登陆",width:270,height:140,html:""};
 		p.html+="<form name=f1 onsubmit='return XMLHttp.formSubmit.call(blog,this,blog.login);' action='ajax.php?action=login' method='POST'>";
 		p.html+="	<table align=center>";
@@ -53,7 +56,8 @@ function Skin(){
 		p.html+="					<input class=button type=submit value=登陆 />&nbsp;";
 		p.html+="					<input class=button type=button onClick=closeActiveLayer() value=取消 />";
 		p.html+="				</td></tr></table></form>";
-		openActiveLayer(p);
+		openActiveLayer(p);*/
+		window.open(Skin.html.loginUrl,'login_popup', 'width=790,height=580')
 	}
 	this.reply=function(cmd,id){
 		var reply;
