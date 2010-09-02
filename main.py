@@ -66,7 +66,8 @@ class TestHandler(webapp.RequestHandler):
         #import sys 
         #sys.setdefaultencoding('utf-8') 
 
-        logs=models.Article.all().fetch(10)
+        logs=models.Article.all()
+        logs = logs.fetch(10)
         for log in logs:            
             #self.response.out.write(dir(log))
             self.response.out.write(log.category)

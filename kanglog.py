@@ -42,6 +42,7 @@ def getPageNum (request):
     return pageNum
 
 def article (request):
+    '''
     def my_dic (obj, name):
         if name == 'category':
             obj = obj.category.name
@@ -69,6 +70,8 @@ def article (request):
         dic['id'] = obj.key().id()
         dicList.append(dic)
     return simplejson.dumps(dicList)
+    '''
+    return simplejson.dumps(Article.all().order('-postTime').fetch(10),cls=GaeEncoder)
 
 def category (request):
     return article(request)
@@ -103,8 +106,11 @@ def comm (request):
     log_id = int(request.get("log_id"))
     comm = Comment(content=request.get("Content"), messager=request.get("Messager"), QQ=int(request.get("QQ")), url=request.get("Url"), mail=db.Email(request.get("Mail")))
     comm.postTime = datetime.datetime.now()
-    comm.article = Article.get_by_id(log_id)
+    article = Article.get_by_id(log_id);
+    comm.article = article    
     comm.put()
+    article.commentCount=article.commentCount+1
+    article.put()
     #TODO IP
 
 def gettime (request):
