@@ -21,7 +21,7 @@ from google.appengine.ext.webapp import util
 
 import os
 from google.appengine.ext.webapp import template
-from util import *
+from util import checkLogin
 
 from google.appengine.api import users
 import logging
@@ -63,10 +63,9 @@ class MainHandler(webapp.RequestHandler):
 
 class TestHandler(webapp.RequestHandler):
     def get (self):
-        import sys 
-        sys.setdefaultencoding('utf-8') 
+        #import sys 
+        #sys.setdefaultencoding('utf-8') 
 
-        import models
         logs=models.Article.all().fetch(10)
         for log in logs:            
             #self.response.out.write(dir(log))
@@ -80,7 +79,7 @@ class AjaxHandler(webapp.RequestHandler):
     def post (self):
         self.doAction();
     def doAction (self):
-        self.response.out.write(kanglog.__getattribute__(cgi.escape(self.request.get('action')))(self.request))
+        self.response.out.write(getattr(kanglog, cgi.escape(self.request.get('action')))(self.request))
 
 loginHtml='''
 <html><head></head>
@@ -95,7 +94,10 @@ class LoginHandler(webapp.RequestHandler):
         else:
             self.response.out.write(loginHtml%("falied"));
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler),('/test',TestHandler),('/ajax.php',AjaxHandler),('/login',LoginHandler)],
+    application = webapp.WSGIApplication([('/', MainHandler),
+                                          ('/test',TestHandler),
+                                          ('/ajax.php',AjaxHandler),
+                                          ('/login',LoginHandler)],
                                          debug=True)
     util.run_wsgi_app(application)
 
